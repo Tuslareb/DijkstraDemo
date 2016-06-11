@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10116"/>
+        <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -673,36 +674,42 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bY5-ss-4cq">
-                                <rect key="frame" x="14" y="187" width="128" height="32"/>
-                                <buttonCell key="cell" type="push" title="Create graph" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4v4-2L-gaB">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="createGraphAction:" target="XfG-lQ-9wD" id="guT-CF-bSN"/>
-                                </connections>
-                            </button>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MCW-od-OmH">
-                                <rect key="frame" x="20" y="233" width="116" height="22"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" title="10" placeholderString="amount of nodes" drawsBackground="YES" id="kg4-xz-4MT">
-                                    <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="0td-B6-QBW"/>
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                                <connections>
-                                    <binding destination="XfG-lQ-9wD" name="value" keyPath="nodeAmountValue" id="X2Q-Ct-SlF"/>
-                                </connections>
-                            </textField>
-                            <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wzg-Ef-Esg">
-                                <rect key="frame" x="141" y="230" width="19" height="27"/>
-                                <stepperCell key="cell" continuous="YES" alignment="left" maxValue="1000" id="Q3Q-v0-suy"/>
-                                <connections>
-                                    <binding destination="XfG-lQ-9wD" name="value" keyPath="nodeAmountValue" id="Wjb-yz-y0U"/>
-                                </connections>
-                            </stepper>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SNZ-Mi-dJI">
+                            <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7OU-Ak-Dfa">
+                                <rect key="frame" x="20" y="221" width="137" height="22"/>
+                                <subviews>
+                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MCW-od-OmH">
+                                        <rect key="frame" x="0.0" y="0.0" width="116" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="116" id="pey-YH-JX8"/>
+                                        </constraints>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" title="10" placeholderString="amount of nodes" drawsBackground="YES" id="kg4-xz-4MT">
+                                            <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="0td-B6-QBW"/>
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                        <connections>
+                                            <binding destination="XfG-lQ-9wD" name="value" keyPath="nodeAmountValue" id="X2Q-Ct-SlF"/>
+                                        </connections>
+                                    </textField>
+                                    <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wzg-Ef-Esg">
+                                        <rect key="frame" x="121" y="-3" width="19" height="27"/>
+                                        <stepperCell key="cell" continuous="YES" alignment="left" maxValue="1000000" id="Q3Q-v0-suy"/>
+                                        <connections>
+                                            <binding destination="XfG-lQ-9wD" name="value" keyPath="nodeAmountValue" id="Wjb-yz-y0U"/>
+                                        </connections>
+                                    </stepper>
+                                </subviews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SNZ-Mi-dJI">
                                 <rect key="frame" x="14" y="140" width="128" height="32"/>
                                 <buttonCell key="cell" type="push" title="Process Dijkstra" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6Li-Vk-YrM">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -712,10 +719,57 @@
                                     <action selector="processDijkstra:" target="XfG-lQ-9wD" id="EIu-tp-dbn"/>
                                 </connections>
                             </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xkn-iu-c2r">
+                                <rect key="frame" x="18" y="247" width="120" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="116" id="KD8-Fs-YxO"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Amount of nodes" id="CKs-Uh-c64">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bY5-ss-4cq">
+                                <rect key="frame" x="14" y="178" width="128" height="32"/>
+                                <buttonCell key="cell" type="push" title="Create graph" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4v4-2L-gaB">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="createGraphAction:" target="XfG-lQ-9wD" id="guT-CF-bSN"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0pa-oU-V5d">
+                                <rect key="frame" x="198" y="149" width="264" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Score: ... ms" id="mei-nI-Lv0">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="fL8-od-Bfq">
+                                <rect key="frame" x="150" y="150" width="16" height="16"/>
+                            </progressIndicator>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="bY5-ss-4cq" firstAttribute="top" secondItem="7OU-Ak-Dfa" secondAttribute="bottom" constant="15" id="8BT-zW-sxh"/>
+                            <constraint firstItem="xkn-iu-c2r" firstAttribute="leading" secondItem="7OU-Ak-Dfa" secondAttribute="leading" id="IQm-4j-vPz"/>
+                            <constraint firstItem="xkn-iu-c2r" firstAttribute="trailing" secondItem="bY5-ss-4cq" secondAttribute="trailing" id="aYN-yX-Kdt"/>
+                            <constraint firstItem="7OU-Ak-Dfa" firstAttribute="top" secondItem="xkn-iu-c2r" secondAttribute="bottom" constant="4" id="bHi-I9-JQ5"/>
+                            <constraint firstItem="xkn-iu-c2r" firstAttribute="trailing" secondItem="SNZ-Mi-dJI" secondAttribute="trailing" id="dOq-2T-7WX"/>
+                            <constraint firstItem="xkn-iu-c2r" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="6" id="fR4-1Z-cVX"/>
+                            <constraint firstItem="SNZ-Mi-dJI" firstAttribute="top" secondItem="bY5-ss-4cq" secondAttribute="bottom" constant="17" id="g3k-T0-Q6x"/>
+                            <constraint firstItem="xkn-iu-c2r" firstAttribute="leading" secondItem="bY5-ss-4cq" secondAttribute="leading" id="khd-ac-8Kh"/>
+                            <constraint firstItem="xkn-iu-c2r" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="mws-nn-NsL"/>
+                            <constraint firstItem="xkn-iu-c2r" firstAttribute="leading" secondItem="SNZ-Mi-dJI" secondAttribute="leading" id="vMu-jH-NLd"/>
+                        </constraints>
                     </view>
                     <connections>
+                        <outlet property="dijkstraActivityIndicator" destination="fL8-od-Bfq" id="Nrx-Ge-t3J"/>
                         <outlet property="dijkstraButton" destination="SNZ-Mi-dJI" id="JAf-Xj-3Nx"/>
+                        <outlet property="dijkstraScoreLabel" destination="0pa-oU-V5d" id="rb6-oh-WeT"/>
+                        <outlet property="graphButton" destination="bY5-ss-4cq" id="MNb-7P-Dew"/>
                         <outlet property="nodeAmountTextField" destination="MCW-od-OmH" id="7Uh-AH-nZs"/>
                         <outlet property="nodeStepper" destination="wzg-Ef-Esg" id="wZ4-Xa-u3r"/>
                     </connections>

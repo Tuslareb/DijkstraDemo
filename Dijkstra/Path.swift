@@ -8,14 +8,24 @@
 
 import Foundation
 
+protocol pathDelegate {
+    func didFinishDijkstraInSeconds(seconds: NSTimeInterval)
+}
+
 class Path{
     
     var total: Int!
     var destination: Vertex
     var previous: Path!
+    var delegate: pathDelegate?
     
     init(){
         destination = Vertex()
+    }
+    
+    private func getCurrentMilliseconds() -> NSTimeInterval {
+        let date: NSDate = NSDate()
+        return date.timeIntervalSince1970*1000
     }
     
     
@@ -23,6 +33,7 @@ class Path{
         
         var frontier = [Path]()
         var finalPaths = [Path]()
+        let startTime = getCurrentMilliseconds()
         
         //use source Vertex's edges to create the frontier
         for edg in source.neighbors{
@@ -86,19 +97,21 @@ class Path{
             }
         }
 
+        let endTime = getCurrentMilliseconds()
+        delegate?.didFinishDijkstraInSeconds(endTime - startTime)
         
-        var pr = shortestPath.previous
-        var vertexRoute = [String]()
-        vertexRoute.append(destination.key!)
-        
-        while pr != nil{
-            vertexRoute.append(pr!.destination.key!)
-            pr = pr?.previous
-        }
-        
-        vertexRoute.append(source.key!)
-        let reverseRoute = Array(vertexRoute.reverse())
-        print(reverseRoute)
+//        var pr = shortestPath.previous
+//        var vertexRoute = [String]()
+//        vertexRoute.append(destination.key!)
+//        
+//        while pr != nil{
+//            vertexRoute.append(pr!.destination.key!)
+//            pr = pr?.previous
+//        }
+//        
+//        vertexRoute.append(source.key!)
+//        let reverseRoute = Array(vertexRoute.reverse())
+//        print(reverseRoute)
         
         return shortestPath
     }
