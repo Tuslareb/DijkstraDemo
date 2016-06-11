@@ -11,6 +11,10 @@
 		C8EBEEA51D0C399000D9802B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EBEEA41D0C399000D9802B /* ViewController.swift */; };
 		C8EBEEA71D0C399000D9802B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8EBEEA61D0C399000D9802B /* Assets.xcassets */; };
 		C8EBEEAA1D0C399000D9802B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8EBEEA81D0C399000D9802B /* Main.storyboard */; };
+		C8EBEEB21D0C598900D9802B /* Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EBEEB11D0C598900D9802B /* Vertex.swift */; };
+		C8EBEEB41D0C59A400D9802B /* Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EBEEB31D0C59A400D9802B /* Edge.swift */; };
+		C8EBEEB61D0C5A9300D9802B /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EBEEB51D0C5A9300D9802B /* Path.swift */; };
+		C8EBEEB81D0C5B2E00D9802B /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EBEEB71D0C5B2E00D9802B /* Graph.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +24,10 @@
 		C8EBEEA61D0C399000D9802B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C8EBEEA91D0C399000D9802B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C8EBEEAB1D0C399000D9802B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C8EBEEB11D0C598900D9802B /* Vertex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vertex.swift; sourceTree = "<group>"; };
+		C8EBEEB31D0C59A400D9802B /* Edge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Edge.swift; sourceTree = "<group>"; };
+		C8EBEEB51D0C5A9300D9802B /* Path.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
+		C8EBEEB71D0C5B2E00D9802B /* Graph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +62,10 @@
 			children = (
 				C8EBEEA21D0C399000D9802B /* AppDelegate.swift */,
 				C8EBEEA41D0C399000D9802B /* ViewController.swift */,
+				C8EBEEB11D0C598900D9802B /* Vertex.swift */,
+				C8EBEEB51D0C5A9300D9802B /* Path.swift */,
+				C8EBEEB71D0C5B2E00D9802B /* Graph.swift */,
+				C8EBEEB31D0C59A400D9802B /* Edge.swift */,
 				C8EBEEA61D0C399000D9802B /* Assets.xcassets */,
 				C8EBEEA81D0C399000D9802B /* Main.storyboard */,
 				C8EBEEAB1D0C399000D9802B /* Info.plist */,
@@ -131,8 +143,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8EBEEB81D0C5B2E00D9802B /* Graph.swift in Sources */,
 				C8EBEEA51D0C399000D9802B /* ViewController.swift in Sources */,
 				C8EBEEA31D0C399000D9802B /* AppDelegate.swift in Sources */,
+				C8EBEEB41D0C59A400D9802B /* Edge.swift in Sources */,
+				C8EBEEB61D0C5A9300D9802B /* Path.swift in Sources */,
+				C8EBEEB21D0C598900D9802B /* Vertex.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
