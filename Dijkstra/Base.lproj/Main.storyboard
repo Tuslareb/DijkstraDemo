@@ -752,7 +752,7 @@
                                 <rect key="frame" x="150" y="150" width="16" height="16"/>
                             </progressIndicator>
                             <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GUk-l7-yxE">
-                                <rect key="frame" x="210" y="219" width="257" height="26"/>
+                                <rect key="frame" x="210" y="219" width="257" height="25"/>
                                 <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="below" numberOfTickMarks="3" allowsTickMarkValuesOnly="YES" sliderType="linear" id="dm6-qc-bWZ"/>
                             </slider>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ICq-Ht-bem">
@@ -787,6 +787,27 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Vl-nx-XgN">
+                                <rect key="frame" x="14" y="107" width="128" height="32"/>
+                                <buttonCell key="cell" type="push" title="Optimized" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="GWl-eq-m5R">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="processOptimizedDijkstra:" target="XfG-lQ-9wD" id="jzi-cn-Lyx"/>
+                                </connections>
+                            </button>
+                            <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="3cQ-Cx-jv9">
+                                <rect key="frame" x="150" y="116" width="16" height="16"/>
+                            </progressIndicator>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pxo-HP-cdP">
+                                <rect key="frame" x="198" y="115" width="264" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Score: ... ms" id="qBq-bR-k9u">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="bY5-ss-4cq" firstAttribute="top" secondItem="7OU-Ak-Dfa" secondAttribute="bottom" constant="15" id="8BT-zW-sxh"/>
@@ -808,6 +829,9 @@
                         <outlet property="graphButton" destination="bY5-ss-4cq" id="MNb-7P-Dew"/>
                         <outlet property="nodeAmountTextField" destination="MCW-od-OmH" id="7Uh-AH-nZs"/>
                         <outlet property="nodeStepper" destination="wzg-Ef-Esg" id="wZ4-Xa-u3r"/>
+                        <outlet property="optimizedDijkstraActivityIndicator" destination="3cQ-Cx-jv9" id="Lhg-Il-0ps"/>
+                        <outlet property="optimizedDijkstraButton" destination="9Vl-nx-XgN" id="BDi-vA-AYe"/>
+                        <outlet property="optimizedDijkstraScoreLabel" destination="Pxo-HP-cdP" id="uYq-mb-6hY"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

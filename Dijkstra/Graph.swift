@@ -8,10 +8,16 @@
 
 import Foundation
 
+protocol pathDelegate {
+    func didFinishDijkstraInSeconds(seconds: NSTimeInterval)
+    func didFinishOptimizedDijkstraInSeconds(seconds: NSTimeInterval)
+}
+
 class Graph{
     
     //declare canvas
     private var canvas: [Vertex]
+    var delegate: pathDelegate?
     var isDirected: Bool
     
     init() {
@@ -74,6 +80,202 @@ class Graph{
         }
     
     }
+    
+    
+    private func getCurrentMilliseconds() -> NSTimeInterval {
+        let date: NSDate = NSDate()
+        return date.timeIntervalSince1970*1000
+    }
+    
+    
+    // MARK: - Processing
+    
+    ///the default Dijkstra algorithm
+    func processDijkstra(source: Vertex, destination: Vertex) -> Path?{
+        
+        var frontier = [Path]()
+        var finalPaths = [Path]()
+        let startTime = getCurrentMilliseconds()
+        
+        //use source Vertex's edges to create the frontier. The frontier is an array with all the paths adjecent to the source vertex.
+        for edg in source.neighbors{
+            
+            let newPath = Path()
+            newPath.destination = edg.neighbor
+            newPath.previous = nil
+            newPath.total = edg.weight
+            
+            //add first paths to frontier
+            frontier.append(newPath)
+        }
+        
+        //construct the best path
+        var bestPath = Path()
+        
+        //start while loop. This will run until there are no more paths in the frontier.
+        while frontier.count != 0{
+            
+            bestPath = Path()
+            var pathIndex = 0
+            
+            //from all the paths currently in the frontier array, get the shortest (best) one. This isn't necessarily the first step of the final shortest route. It's just the path to the closest vertex (the path with the least weight).
+            for x in 0..<frontier.count{
+                
+                let itemPath = frontier[x]
+                
+                if bestPath.total == nil || itemPath.total < bestPath.total{
+                    bestPath = itemPath
+                    pathIndex = x
+                }
+            }
+            
+            //get the destination vertex of the best path. Get all of the neighbors of the destination vertex and create paths from the destination vertex to all of its neighbors. It's possible the destinatoion vertex doesn't have a neighbor. In that case, nothing is added to the frontier. This way, the frontier will steadily empty itself. 
+            for edg in bestPath.destination.neighbors{
+                
+                let newPath = Path()
+                newPath.destination = edg.neighbor
+                newPath.previous = bestPath
+                newPath.total = bestPath.total + edg.weight
+                
+                //add the new paths to the frontier. The frontier now contains all the paths that originate from the source vertex but also all the paths that originate from the destination vertex of the first best path (which originated from the source vertex)
+                frontier.append(newPath)
+            }
+            
+            //preserve the bestPath and remove it from the frontier. The frontier now contains all the paths like before, with the exception of the bestPath. After the removal, the while loop will start again.
+            finalPaths.append(bestPath)
+            frontier.removeAtIndex(pathIndex)
+            
+        } //end while
+        
+        //get the shortest path
+        var shortestPath: Path! = Path()
+        
+        for itemPath in finalPaths{
+            
+            if itemPath.destination.key == destination.key{
+                
+                if shortestPath.total == nil || itemPath.total < shortestPath.total{
+                    shortestPath = itemPath
+                }
+            }
+        }
+        
+        let endTime = getCurrentMilliseconds()
+        delegate?.didFinishDijkstraInSeconds(endTime - startTime)
+        
+//                var pr = shortestPath.previous
+//                var vertexRoute = [String]()
+//                vertexRoute.append(destination.key!)
+//        
+//                while pr != nil{
+//                    vertexRoute.append(pr!.destination.key!)
+//                    pr = pr?.previous
+//                }
+//        
+//                vertexRoute.append(source.key!)
+//                let reverseRoute = Array(vertexRoute.reverse())
+//                print(reverseRoute)
+        print(shortestPath.total)
+        
+        return shortestPath
+    }
+    
+    
+    ///an optimized version of Dijkstra's shortest path algorthim
+    func processDijkstraWithHeap(source: Vertex, destination: Vertex) -> Path! {
+        
+        
+        let frontier: PathHeap = PathHeap()
+        let finalPaths: PathHeap = PathHeap()
+        let startTime = getCurrentMilliseconds()
+        
+        
+        //use source edges to create the frontier
+        for e in source.neighbors {
+            
+            let newPath: Path = Path()
+            
+            
+            newPath.destination = e.neighbor
+            newPath.previous = nil
+            newPath.total = e.weight
+            
+            
+            //add the new path to the frontier
+            frontier.enQueue(newPath)
+            
+        }
+        
+        
+        //construct the best path
+        var bestPath: Path = Path()
+        
+        
+        while frontier.count != 0 {
+            
+            //use the greedy approach to obtain the best path
+            bestPath = Path()
+            bestPath = frontier.peek()
+            
+            
+            //enumerate the bestPath edges
+            for e in bestPath.destination.neighbors {
+                
+                let newPath: Path = Path()
+                
+                newPath.destination = e.neighbor
+                newPath.previous = bestPath
+                newPath.total = bestPath.total + e.weight
+                
+                
+                //add the new path to the frontier
+                frontier.enQueue(newPath)
+                
+            }
+            
+            
+            //preserve the bestPaths that match destination
+            if (bestPath.destination.key == destination.key) {
+                finalPaths.enQueue(bestPath)
+            }
+            
+            
+            //remove the bestPath from the frontier
+            frontier.deQueue()
+            
+            
+        } //end while
+        
+        
+        
+        //obtain the shortest path from the heap
+        var shortestPath: Path! = Path()
+        shortestPath = finalPaths.peek()
+        
+        let endTime = getCurrentMilliseconds()
+        delegate?.didFinishOptimizedDijkstraInSeconds(endTime - startTime)
+        
+        
+//            var pr = shortestPath.previous
+//            var vertexRoute = [String]()
+//            vertexRoute.append(destination.key!)
+//            
+//            while pr != nil{
+//                vertexRoute.append(pr!.destination.key!)
+//                pr = pr?.previous
+//            }
+//            
+//            vertexRoute.append(source.key!)
+//            let reverseRoute = Array(vertexRoute.reverse())
+//            print(reverseRoute)
+        
+        print(shortestPath.total)
+
+        
+        return shortestPath
+        
+    }
+
     
     
     

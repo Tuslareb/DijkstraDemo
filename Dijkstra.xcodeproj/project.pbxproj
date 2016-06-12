@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C83F0F341D0CA1B000377CD7 /* DispatchUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83F0F331D0CA1B000377CD7 /* DispatchUtilities.swift */; };
+		C83F0F361D0D3C1A00377CD7 /* PathHeap.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83F0F351D0D3C1A00377CD7 /* PathHeap.swift */; };
 		C8EBEEA31D0C399000D9802B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EBEEA21D0C399000D9802B /* AppDelegate.swift */; };
 		C8EBEEA51D0C399000D9802B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EBEEA41D0C399000D9802B /* ViewController.swift */; };
 		C8EBEEA71D0C399000D9802B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8EBEEA61D0C399000D9802B /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		C83F0F331D0CA1B000377CD7 /* DispatchUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DispatchUtilities.swift; sourceTree = "<group>"; };
+		C83F0F351D0D3C1A00377CD7 /* PathHeap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathHeap.swift; sourceTree = "<group>"; };
 		C8EBEE9F1D0C399000D9802B /* Dijkstra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dijkstra.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8EBEEA21D0C399000D9802B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C8EBEEA41D0C399000D9802B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 				C83F0F331D0CA1B000377CD7 /* DispatchUtilities.swift */,
 				C8EBEEB11D0C598900D9802B /* Vertex.swift */,
 				C8EBEEB51D0C5A9300D9802B /* Path.swift */,
+				C83F0F351D0D3C1A00377CD7 /* PathHeap.swift */,
 				C8EBEEB71D0C5B2E00D9802B /* Graph.swift */,
 				C8EBEEB31D0C59A400D9802B /* Edge.swift */,
 				C8EBEEA61D0C399000D9802B /* Assets.xcassets */,
@@ -150,6 +153,7 @@
 				C8EBEEB81D0C5B2E00D9802B /* Graph.swift in Sources */,
 				C8EBEEA51D0C399000D9802B /* ViewController.swift in Sources */,
 				C8EBEEA31D0C399000D9802B /* AppDelegate.swift in Sources */,
+				C83F0F361D0D3C1A00377CD7 /* PathHeap.swift in Sources */,
 				C8EBEEB41D0C59A400D9802B /* Edge.swift in Sources */,
 				C8EBEEB61D0C5A9300D9802B /* Path.swift in Sources */,
 				C8EBEEB21D0C598900D9802B /* Vertex.swift in Sources */,

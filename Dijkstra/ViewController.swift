@@ -21,6 +21,9 @@ class ViewController: NSViewController, pathDelegate {
     @IBOutlet weak var dijkstraScoreLabel: NSTextField!
     @IBOutlet weak var dijkstraActivityIndicator: NSProgressIndicator!
 
+    @IBOutlet weak var optimizedDijkstraButton: NSButton!
+    @IBOutlet weak var optimizedDijkstraScoreLabel: NSTextField!
+    @IBOutlet weak var optimizedDijkstraActivityIndicator: NSProgressIndicator!
     
 
     override func viewDidLoad() {
@@ -28,6 +31,9 @@ class ViewController: NSViewController, pathDelegate {
         
         dijkstraButton.enabled = false
         dijkstraActivityIndicator.hidden = true
+        
+        optimizedDijkstraButton.enabled = false
+        optimizedDijkstraActivityIndicator.hidden = true
     }
 
     override var representedObject: AnyObject? {
@@ -48,19 +54,24 @@ class ViewController: NSViewController, pathDelegate {
         dijkstraButton.enabled = false
         dijkstraScoreLabel.stringValue = "Score: ... ms"
         
+        optimizedDijkstraButton.enabled = false
+        optimizedDijkstraScoreLabel.stringValue = "Score: ... ms"
+        
+        
         dispatch_async(GlobalUserInitiatedQueue){
         
             self.graph = Graph()
+            self.graph.delegate = self
             var index: Int = 0
             var currentNode: Vertex!
             var currentChildren = [Vertex]()
             var amountOfChildrenPerNode: Int{
                 
-                return Int(arc4random_uniform(UInt32(3)))
+                return 2 //Int(arc4random_uniform(UInt32(3)))
             }
             
             var weight: Int{
-                return Int(arc4random_uniform(UInt32(10)))
+                return 2 //Int(arc4random_uniform(UInt32(10)))
             }
             
             //create root vertex with index 0
@@ -88,8 +99,7 @@ class ViewController: NSViewController, pathDelegate {
                     currentChildren.append(child)
                     index += 1
                 }
-                
-     
+  
             }
             
             dispatch_async(GlobalMainQueue){
@@ -97,6 +107,7 @@ class ViewController: NSViewController, pathDelegate {
                 //graphProgressIndicator.hidden = true
                 self.graphButton.title = "New graph"
                 self.dijkstraButton.enabled = true
+                self.optimizedDijkstraButton.enabled = true 
 
             }
         }
@@ -109,17 +120,33 @@ class ViewController: NSViewController, pathDelegate {
         
         dijkstraActivityIndicator.hidden = false
         dijkstraActivityIndicator.startAnimation(self)
+        dijkstraScoreLabel.stringValue = "Score: ... ms"
         
-        let path = Path()
-        path.delegate = self
+
+
         guard let start = graph.giveVertexForPosition(.Start), let end = graph.giveVertexForPosition(.End) else {return}
         
         dispatch_async(GlobalUserInitiatedQueue){
-            path.processDijkstra(start, destination: end)
+                self.graph.processDijkstra(start, destination: end)
         }
+ 
+    }
+    
 
+    @IBAction func processOptimizedDijkstra(sender: NSButton) {
+        
+        optimizedDijkstraActivityIndicator.hidden = false
+        optimizedDijkstraActivityIndicator.startAnimation(self)
+        optimizedDijkstraScoreLabel.stringValue = "Score: ... ms"
+        
+        guard let start = graph.giveVertexForPosition(.Start), let end = graph.giveVertexForPosition(.End) else {return}
+        
+        dispatch_async(GlobalUserInitiatedQueue){
+            self.graph.processDijkstraWithHeap(start, destination: end)
+        }
         
     }
+    
     
     // MARK: - path delegate
     
@@ -131,6 +158,18 @@ class ViewController: NSViewController, pathDelegate {
             self.dijkstraScoreLabel.stringValue = "Score: \(timeString) ms"
             self.dijkstraActivityIndicator.stopAnimation(self)
             self.dijkstraActivityIndicator.hidden = true
+        }
+    }
+    
+    func didFinishOptimizedDijkstraInSeconds(seconds: NSTimeInterval){
+        
+        dispatch_async(GlobalMainQueue){
+            
+            let timeString = String(format: "%.2f", seconds)
+            self.optimizedDijkstraScoreLabel.stringValue = "Score: \(timeString) ms"
+            self.optimizedDijkstraActivityIndicator.stopAnimation(self)
+            self.optimizedDijkstraActivityIndicator.hidden = true
+            
         }
     }
     
