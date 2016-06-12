@@ -227,7 +227,6 @@ class Graph{
                 newPath.previous = bestPath
                 newPath.total = bestPath.total + e.weight
                 
-                
                 //add the new path to the frontier
                 frontier.enQueue(newPath)
                 
