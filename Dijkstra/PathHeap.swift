@@ -10,7 +10,7 @@ import Foundation
 
 class PathHeap {
     
-    private var heap: Array<Path>
+    var heap: Array<Path>
     
     init() {
         heap = Array<Path>()
@@ -50,9 +50,10 @@ class PathHeap {
     //sort shortest paths into a min-heap (heapify)
     func enQueue(key: Path) {
         
+        print("enqueue path with destination: \(key.destination.key)")
         
         heap.append(key)
-        //print("on heap: \(key.destination.key)")
+        print("on heap: path with destination: \(heap.last?.destination)")
         
         
         var childIndex: Float = Float(heap.count) - 1
@@ -90,6 +91,7 @@ class PathHeap {
             if (childIndex != 0) {
                 parentIndex = Int(floorf((childIndex - 1) / 2))
             }
+            print("parent now is \(heap.first?.destination.key)")
             
             
         } //end while

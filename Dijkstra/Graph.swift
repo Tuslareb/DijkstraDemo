@@ -16,7 +16,7 @@ protocol pathDelegate {
 class Graph{
     
     //declare canvas
-    private var canvas: [Vertex]
+    var canvas: [Vertex]
     var delegate: pathDelegate?
     var isDirected: Bool
     
@@ -235,12 +235,15 @@ class Graph{
             
             //preserve the bestPaths that match destination
             if (bestPath.destination.key == destination.key) {
+                print("there a bestpath with correct destination")
                 finalPaths.enQueue(bestPath)
             }
             
             
             //remove the bestPath from the frontier
             frontier.deQueue()
+            
+            print(frontier.heap)
             
             
         } //end while
@@ -268,7 +271,16 @@ class Graph{
 //            let reverseRoute = Array(vertexRoute.reverse())
 //            print(reverseRoute)
         
-        print(shortestPath.total)
+        if let sp = shortestPath{
+            
+            print(sp.total)
+            
+        }
+        else{
+            print("shortest path is nil")
+        }
+        
+        
 
         
         return shortestPath
