@@ -53,7 +53,7 @@ class PathHeap {
         print("enqueue path with destination: \(key.destination.key)")
         
         heap.append(key)
-        print("on heap: path with destination: \(heap.last?.destination)")
+        print("on heap: path with destination: \(heap.last?.destination.key)")
         
         
         var childIndex: Float = Float(heap.count) - 1
@@ -80,6 +80,7 @@ class PathHeap {
             
             //swap child and parent positions
             if childToUse.total < parentToUse.total {
+                print("swap parent with index \(parentIndex) with child with index: \(childIndex)")
                 swap(&heap[parentIndex], &heap[Int(childIndex)])
             }
             
@@ -91,7 +92,8 @@ class PathHeap {
             if (childIndex != 0) {
                 parentIndex = Int(floorf((childIndex - 1) / 2))
             }
-            print("parent now is \(heap.first?.destination.key)")
+           print("parent now is \(heap.first?.destination.key) and childIndex is now \(childIndex)")
+
             
             
         } //end while

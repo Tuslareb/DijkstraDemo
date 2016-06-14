@@ -235,7 +235,7 @@ class Graph{
             
             //preserve the bestPaths that match destination
             if (bestPath.destination.key == destination.key) {
-                print("there a bestpath with correct destination")
+                //print("there a bestpath with correct destination")
                 finalPaths.enQueue(bestPath)
             }
             
@@ -243,7 +243,7 @@ class Graph{
             //remove the bestPath from the frontier
             frontier.deQueue()
             
-            print(frontier.heap)
+            //print(frontier.heap)
             
             
         } //end while
